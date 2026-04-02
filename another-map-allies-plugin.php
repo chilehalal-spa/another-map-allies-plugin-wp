@@ -3,7 +3,7 @@
 Plugin Name: Another Map Allies Plugin
 Plugin URI: https://github.com/chomusuke-png/another-map-allies-plugin-wp
 Description: Grid de aliados con carga de imágenes personalizada y mapa de conexiones. (Estructura Modular)
-Version: 5.2
+Version: 1.5.3
 Author: Zumito
 Author URI: https://github.com/chomusuke-png
 License: GPL2
