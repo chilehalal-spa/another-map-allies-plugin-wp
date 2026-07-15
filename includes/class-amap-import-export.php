@@ -51,7 +51,7 @@ class AMAP_Import_Export {
 		$output = fopen( 'php://output', 'w' );
 
 		// Encabezados del CSV
-		fputcsv( $output, array( 'ID', 'Title', 'Top (%)', 'Left (%)', 'Label 1', 'Label 2', 'Label 3', 'Image URL' ) );
+		fputcsv( $output, array( 'ID', 'Title', 'Latitud', 'Longitud', 'Label 1', 'Label 2', 'Label 3', 'Image URL' ) );
 
 		$args = array(
 			'post_type'      => 'amap_ally',
@@ -72,8 +72,8 @@ class AMAP_Import_Export {
 				$row = array(
 					$id,
 					get_the_title(),
-					get_post_meta( $id, '_amap_pin_top', true ),
-					get_post_meta( $id, '_amap_pin_left', true ),
+					get_post_meta( $id, '_amap_lat', true ),
+					get_post_meta( $id, '_amap_lng', true ),
 					get_post_meta( $id, '_amap_label_1', true ),
 					get_post_meta( $id, '_amap_label_2', true ),
 					get_post_meta( $id, '_amap_label_3', true ),
@@ -113,12 +113,12 @@ class AMAP_Import_Export {
 
 			while ( ( $data = fgetcsv( $handle, 1000, ',' ) ) !== FALSE ) {
 				// Mapeo de columnas según el orden del export:
-				// 0: ID, 1: Title, 2: Top, 3: Left, 4: L1, 5: L2, 6: L3, 7: ImgURL
-				
+				// 0: ID, 1: Title, 2: Lat, 3: Lng, 4: L1, 5: L2, 6: L3, 7: ImgURL
+
 				$post_id     = isset( $data[0] ) ? intval( $data[0] ) : 0;
 				$title       = isset( $data[1] ) ? sanitize_text_field( $data[1] ) : 'Sin Titulo';
-				$top         = isset( $data[2] ) ? sanitize_text_field( $data[2] ) : '';
-				$left        = isset( $data[3] ) ? sanitize_text_field( $data[3] ) : '';
+				$lat         = isset( $data[2] ) ? sanitize_text_field( $data[2] ) : '';
+				$lng         = isset( $data[3] ) ? sanitize_text_field( $data[3] ) : '';
 				$l1          = isset( $data[4] ) ? sanitize_text_field( $data[4] ) : '';
 				$l2          = isset( $data[5] ) ? sanitize_text_field( $data[5] ) : '';
 				$l3          = isset( $data[6] ) ? sanitize_text_field( $data[6] ) : '';
@@ -139,8 +139,8 @@ class AMAP_Import_Export {
 				}
 
 				if ( $post_id ) {
-					update_post_meta( $post_id, '_amap_pin_top', $top );
-					update_post_meta( $post_id, '_amap_pin_left', $left );
+					update_post_meta( $post_id, '_amap_lat', $lat );
+					update_post_meta( $post_id, '_amap_lng', $lng );
 					update_post_meta( $post_id, '_amap_label_1', $l1 );
 					update_post_meta( $post_id, '_amap_label_2', $l2 );
 					update_post_meta( $post_id, '_amap_label_3', $l3 );
