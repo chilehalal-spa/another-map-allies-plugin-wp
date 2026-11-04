@@ -1,17 +1,23 @@
 <?php
 /*
 Plugin Name: Another Map Allies Plugin
-Plugin URI: https://github.com/chomusuke-png/another-map-allies-plugin-wp
+Plugin URI: https://github.com/chilehalal-spa/another-map-allies-plugin-wp
 Description: Grid de aliados con carga de imágenes personalizada y mapa de conexiones. (Estructura Modular)
-Version: 1.6.0
+Version: 1.7.0
 Author: Zumito
 Author URI: https://github.com/chomusuke-png
 License: GPL2
+Requires at least: 5.8
+Update URI: https://github.com/chilehalal-spa/another-map-allies-plugin-wp
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// Actualizaciones desde las releases de GitHub
+require_once __DIR__ . '/includes/class-chilehalal-github-updater.php';
+Chilehalal_GitHub_Updater_V1::register( __FILE__, 'chilehalal-spa/another-map-allies-plugin-wp' );
 
 // 1. Definir Constantes
 define( 'AMAP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
